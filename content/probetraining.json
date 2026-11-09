@@ -1,0 +1,52 @@
+{
+  "info_pdf": "/files/probetraining-info_a4ae16e8.pdf",
+  "standorte": [
+    {
+      "name": "Heimenkirch",
+      "termine": [
+        {
+          "datum": "2026-12-03",
+          "hinweis": ""
+        }
+      ],
+      "kurse": [
+        {
+          "name": "Kindergruppe 1 (6-9 Jahre)",
+          "zeit": "Donnerstag, 17:00 – 18:00 Uhr",
+          "voll": false
+        },
+        {
+          "name": "Kindergruppe 2 (10-14 Jahre)",
+          "zeit": "Donnerstag, 18:00 – 19:00 Uhr",
+          "voll": false
+        }
+      ]
+    },
+    {
+      "name": "Kißlegg",
+      "termine": [
+        {
+          "datum": "2026-12-04",
+          "hinweis": ""
+        }
+      ],
+      "kurse": [
+        {
+          "name": "Kindergruppe 1 (6-9 Jahre)",
+          "zeit": "Freitag, 15:30 – 16:30 Uhr",
+          "voll": false
+        },
+        {
+          "name": "Kindergruppe 2 (10-14 Jahre)",
+          "zeit": "Freitag, 16:30 – 17:30 Uhr",
+          "voll": true
+        },
+        {
+          "name": "Jugendliche & Erwachsene (ab 15)",
+          "zeit": "Freitag, 17:45 – 18:45 Uhr",
+          "voll": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Lokal ausgelieferte Schriftdateien: kein Abruf bei Google Fonts. */
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-latin-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-latin-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* Custom Taekwondo colors */
+  --color-tkd-navy: oklch(0.15 0.03 250);
+  --color-tkd-navy-light: oklch(0.20 0.03 250);
+  --color-tkd-cyan: oklch(0.80 0.15 195);
+  --color-tkd-red: #FF6B6B;
+  --color-tkd-red-light: #FF6B6B;
+  --color-tkd-gold: oklch(0.75 0.15 80);
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Source Sans 3", sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: #F1F7F6;
+  --foreground: oklch(0.20 0.02 250);
+  --card: #F1F7F6;
+  --card-foreground: oklch(0.20 0.02 250);
+  --popover: #F1F7F6;
+  --popover-foreground: oklch(0.20 0.02 250);
+  --primary: oklch(0.80 0.15 195);
+  --primary-foreground: oklch(0.15 0.03 250);
+  --secondary: oklch(0.94 0.01 250);
+  --secondary-foreground: oklch(0.20 0.02 250);
+  --muted: oklch(0.92 0.01 250);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --accent: oklch(0.55 0.22 25);
+  --accent-foreground: oklch(0.98 0.01 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 0);
+  --border: oklch(0.85 0.01 250);
+  --input: oklch(0.85 0.01 250);
+  --ring: oklch(0.80 0.15 195);
+  --chart-1: oklch(0.80 0.15 195);
+  --chart-2: oklch(0.55 0.22 25);
+  --chart-3: oklch(0.75 0.15 80);
+  --chart-4: oklch(0.60 0.10 250);
+  --chart-5: oklch(0.70 0.12 150);
+  --sidebar: oklch(0.20 0.02 250);
+  --sidebar-foreground: oklch(0.92 0.01 250);
+  --sidebar-primary: oklch(0.80 0.15 195);
+  --sidebar-primary-foreground: oklch(0.15 0.03 250);
+  --sidebar-accent: oklch(0.20 0.03 250);
+  --sidebar-accent-foreground: oklch(0.92 0.01 250);
+  --sidebar-border: oklch(0.32 0.02 250);
+  --sidebar-ring: oklch(0.80 0.15 195);
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    font-family: "Source Sans 3", sans-serif;
+    overflow-wrap: break-word;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mobile-safe-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Diagonal section divider */
+  .diagonal-top {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+    margin-top: -4rem;
+    padding-top: 6rem;
+  }
+
+  .diagonal-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    padding-bottom: 6rem;
+  }
+
+  /* Cyan glow effect */
+  .glow-cyan {
+    box-shadow: 0 0 20px oklch(0.80 0.15 195 / 0.3), 0 0 40px oklch(0.80 0.15 195 / 0.1);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px oklch(0.55 0.22 25 / 0.3), 0 0 40px oklch(0.55 0.22 25 / 0.1);
+  }
+
+  /* Red accent underline for headings */
+  .heading-accent {
+    position: relative;
+    display: inline-block;
+  }
+  .heading-accent::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: oklch(0.55 0.22 25);
+    border-radius: 2px;
+  }
+}

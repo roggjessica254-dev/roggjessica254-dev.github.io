@@ -1,0 +1,236 @@
+# Verwaltungsbereich (Pages CMS – https://app.pagescms.org)
+# Hier wird festgelegt, welche Inhalte der Website ohne Programmierkenntnisse bearbeitet werden können.
+
+media:
+  input: client/public/files
+  output: /files
+
+content:
+  # ---------------------------------------------------------------- Aktuelles
+  - name: aktuelles
+    label: Aktuelles (Beiträge)
+    type: collection
+    path: content/aktuelles
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: titel
+      fields: [titel, datum, ort]
+      sort: datum
+      order: desc
+    fields:
+      - name: titel
+        label: Überschrift
+        type: string
+        required: true
+      - name: datum
+        label: Datum
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: ort
+        label: Ort
+        type: string
+        description: z. B. Heimenkirch, Kißlegg, Oberhaching
+      - name: vorschautext
+        label: Kurztext für die Übersicht
+        type: text
+        description: 1–2 Sätze, erscheinen in der Beitragsübersicht und oben im Beitrag.
+      - name: titelbild
+        label: Titelbild
+        type: image
+      - name: titelbild_vollstaendig
+        label: Titelbild vollständig zeigen (nicht zuschneiden)
+        type: boolean
+        default: false
+      - name: titelbild_ausschnitt
+        label: Bildausschnitt (optional, für Fortgeschrittene)
+        type: string
+        description: "z. B. 'center 30%' – leer lassen, wenn unsicher."
+      - name: text
+        label: Text
+        type: text
+        description: Absätze durch eine Leerzeile trennen. **Wort** wird fett.
+      - name: galerie
+        label: Bildergalerie
+        type: object
+        list: true
+        fields:
+          - name: bild
+            label: Bild
+            type: image
+          - name: vollstaendig
+            label: Bild vollständig zeigen (nicht zuschneiden)
+            type: boolean
+            default: false
+          - name: ausschnitt
+            label: Bildausschnitt (optional)
+            type: string
+      - name: youtube
+        label: YouTube-Videos
+        type: object
+        list: true
+        fields:
+          - name: url
+            label: YouTube-Link
+            type: string
+            description: Link aus YouTube kopieren (Teilen → Link kopieren)
+          - name: titel
+            label: Beschriftung
+            type: string
+      - name: entwurf
+        label: Entwurf (noch nicht veröffentlichen)
+        type: boolean
+        default: false
+
+  # ---------------------------------------------------------------- Probetraining
+  - name: probetraining
+    label: Probetraining (Termine & Kurse)
+    type: file
+    path: content/probetraining.json
+    format: json
+    fields:
+      - name: standorte
+        label: Standorte
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Standort
+            type: string
+            required: true
+          - name: termine
+            label: Probetraining-Tage
+            description: Nur den 1. Termin eintragen – der 2. Termin ist automatisch 7 Tage später. Gilt für alle Kurse dieses Standorts, die nicht „voll“ sind. Vergangene Termine verschwinden automatisch.
+            type: object
+            list: true
+            fields:
+              - name: datum
+                label: Datum (1. Probetraining)
+                type: date
+                required: true
+                options:
+                  format: yyyy-MM-dd
+              - name: hinweis
+                label: Hinweis (optional)
+                type: string
+                description: z. B. „Alte Turnhalle“
+          - name: kurse
+            label: Kurse
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: Kursname
+                type: string
+                required: true
+              - name: zeit
+                label: Trainingszeit
+                type: string
+                description: z. B. Donnerstag, 17:00 – 18:00 Uhr
+              - name: voll
+                label: Kurs ist voll → nur Warteliste
+                type: boolean
+                default: false
+      - name: info_pdf
+        label: Info-PDF zum Probetraining (wird mit jeder Bestätigung verschickt)
+        type: file
+
+  # ---------------------------------------------------------------- Downloads
+  - name: downloads
+    label: Downloads
+    type: file
+    path: content/downloads.json
+    format: json
+    fields:
+      - name: dateien
+        label: Dateien
+        type: object
+        list: true
+        fields:
+          - name: titel
+            label: Titel
+            type: string
+            required: true
+          - name: beschreibung
+            label: Beschreibung
+            type: text
+          - name: datei
+            label: Datei (PDF)
+            type: file
+            required: true
+
+  # ---------------------------------------------------------------- Ferienzeiten
+  - name: ferienzeiten
+    label: Ferienzeiten / Trainingsausfälle
+    type: file
+    path: content/ferienzeiten.json
+    format: json
+    fields:
+      - name: ueberschrift
+        label: Überschrift
+        type: string
+      - name: heimenkirch
+        label: Heimenkirch
+        type: object
+        list: true
+        fields:
+          - name: datum
+            label: Datum (z. B. 24.12.2026)
+            type: string
+          - name: grund
+            label: Was ist los?
+            type: string
+      - name: kisslegg
+        label: Kißlegg
+        type: object
+        list: true
+        fields:
+          - name: datum
+            label: Datum (z. B. 25.12.2026)
+            type: string
+          - name: grund
+            label: Was ist los?
+            type: string
+
+  # ---------------------------------------------------------------- Lernvideos
+  - name: lernvideos
+    label: Lernvideos (YouTube)
+    type: file
+    path: content/lernvideos.json
+    format: json
+    fields:
+      - name: videos
+        label: Videos
+        type: object
+        list: true
+        fields:
+          - name: guertel
+            label: Gürtelstufe
+            type: select
+            required: true
+            options:
+              values:
+                - { value: weissgurt, label: Weißgurt }
+                - { value: weiss-gelb-gurt, label: Weiß-Gelb-Gurt }
+                - { value: gelbgurt, label: Gelbgurt }
+                - { value: gelb-gruen-gurt, label: Gelb-Grün-Gurt }
+                - { value: gruen-gurt, label: Grüngurt }
+                - { value: gruen-blau-gurt, label: Grün-Blau-Gurt }
+                - { value: blaugurt, label: Blaugurt }
+                - { value: blau-braun-gurt, label: Blau-Braun-Gurt }
+                - { value: braungurt, label: Braungurt }
+                - { value: braun-schwarz-gurt, label: Braun-Schwarz-Gurt }
+                - { value: schwarzgurt, label: Schwarzgurt }
+          - name: titel
+            label: Titel
+            type: string
+            required: true
+          - name: url
+            label: YouTube-Link
+            type: string
+            required: true
+          - name: beschreibung
+            label: Kurzbeschreibung
+            type: string
